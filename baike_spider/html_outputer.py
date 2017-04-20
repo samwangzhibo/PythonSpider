@@ -9,6 +9,7 @@ Created on 2016-3-30
 class HtmlOutputer(object):
     def __init__(self):
         self.datas = []
+        self.fout = open('output.html', 'w')
 
     
     def collect_data(self, data):
@@ -18,32 +19,32 @@ class HtmlOutputer(object):
 
     
     def output_html(self):
-        fout = open('output.html', 'w')
+        #self.fout = open('output.html', 'w')
         
         
-        fout.write("<html>")
-        fout.write("<body>")
+        self.fout.write("<html>")
+        self.fout.write("<body>")
         
         #以免乱码
-        fout.write("<head>")
-        fout.write('<meta charset="utf-8">')
-        fout.write("</head>")
+        self.fout.write("<head>")
+        self.fout.write('<meta charset="utf-8">')
+        self.fout.write("</head>")
         
         
-        fout.write("<table>")
+        self.fout.write("<table>")
         
         #ascii 
         for data in self.datas:
-            fout.write("<tr>")
-            fout.write("<td>%s</td>" % data['url'])
-            fout.write("<td>%s</td>" % data['title'].encode('utf-8'))
-            fout.write("<td>%s</td>" % data['summary'].encode('utf-8'))
-            fout.write("</tr>")
+            self.fout.write("<tr>")
+            self.fout.write("<td>%s</td>" % data['url'])
+            self.fout.write("<td>%s</td>" % data['title'].encode('utf-8'))
+            self.fout.write("<td>%s</td>" % data['summary'].encode('utf-8'))
+            self.fout.write("</tr>")
         
-        fout.write("</table>")
-        fout.write("</body>")
-        fout.write("</html>")
-        fout.close()
+        self.fout.write("</table>")
+        self.fout.write("</body>")
+        self.fout.write("</html>")
+        self.fout.close()
     
     
     
