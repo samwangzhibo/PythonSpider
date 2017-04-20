@@ -24,18 +24,18 @@ class SpiderMain(object):
                 new_url = self.urls.get_new_url()
                 print 'craw %d : %s' % (count, new_url)
                 html_cont = self.downloader.download(new_url)
-                new_urls, new_data = self.parser.parse(new_url, html_cont)
+                new_urls, new_data, new_link_entry = self.parser.parse(new_url, html_cont)
                 self.urls.add_new_urls(new_urls)
                 #self.outputer.collect_data(new_urls)
                 self.outputer.collect_data(new_data)
-                
-                if count == 10:
+                self.outputer.output_html(new_link_entry)
+                if count == 3:
                     break
                 
                 count = count + 1 
             except Exception,e:  
-                print Exception,":",e    
-        self.outputer.output_html()
+                print Exception,":",e
+        self.outputer.output_self_html()
 
 if __name__=="__main__":
     root_url = "http://baike.baidu.com/view/21087.htm"
